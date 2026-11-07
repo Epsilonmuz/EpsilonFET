@@ -1,0 +1,96 @@
+name: Build macOS
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - EpsilonFET_v0.2.0_Repository.bundle
+      - .github/workflows/build.yml
+
+permissions:
+  contents: read
+
+jobs:
+  mac:
+    runs-on: macos-15-intel
+    timeout-minutes: 40
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Open the preserved project
+        run: |
+          set -euo pipefail
+          git bundle verify EpsilonFET_v0.2.0_Repository.bundle
+          git clone EpsilonFET_v0.2.0_Repository.bundle project
+          test "$(git -C project rev-parse HEAD)" = "8d79951aa94732bc779c98052e6586a2a301fd6e"
+          mkdir -p dist
+          {
+            sw_vers
+            uname -m
+            sysctl -n machdep.cpu.brand_string
+            git -C project rev-parse HEAD
+          } | tee dist/build-machine.txt
+
+      - name: Verify Xcode optimisation settings
+        working-directory: project
+        run: |
+          set -euo pipefail
+          for cfg in Debug Release; do
+            level=$(xcodebuild -project "Builds/MacOSX/Epsilon FET.xcodeproj" \
+              -target "Epsilon FET - Shared Code" -configuration "$cfg" \
+              -showBuildSettings 2>/dev/null | awk '/ GCC_OPTIMIZATION_LEVEL / && !seen {print $3; seen=1}')
+            echo "$cfg: -O$level"
+            test -n "$level"
+            test "$level" != "0"
+          done
+
+      - name: Build universal VST3, AU and standalone
+        working-directory: project
+        run: |
+          set -euo pipefail
+          xcodebuild -project "Builds/MacOSX/Epsilon FET.xcodeproj" \
+            -target "Epsilon FET - All" -configuration Release \
+            ARCHS="arm64 x86_64" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="-" -quiet build
+          lipo -verify_arch x86_64 arm64 "Builds/MacOSX/build/Release/Epsilon FET.vst3/Contents/MacOS/Epsilon FET"
+
+      - name: Run supplied processor tests on Intel
+        working-directory: project
+        run: |
+          set -euo pipefail
+          cmake -B testbuild -DCMAKE_BUILD_TYPE=Release -DEF_BUILD_TESTS=ON
+          cmake --build testbuild --target EpsilonPluginTest --config Release -j 4
+          app="$PWD/testbuild/EpsilonPluginTest_artefacts/Release/EpsilonPluginTest"
+          test -x "$app"
+          "$app" 2>&1 | tee "$GITHUB_WORKSPACE/dist/processor-tests.log"
+
+      - name: Validate compiled VST3 with pluginval
+        working-directory: project
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 -o pluginval.zip \
+            https://github.com/Tracktion/pluginval/releases/download/v1.0.4/pluginval_macOS.zip
+          unzip -q pluginval.zip
+          ./pluginval.app/Contents/MacOS/pluginval --strictness-level 5 --skip-gui-tests \
+            --validate "Builds/MacOSX/build/Release/Epsilon FET.vst3" 2>&1 | tee "$GITHUB_WORKSPACE/dist/pluginval.log"
+
+      - name: Package the compiled plugins
+        working-directory: project
+        run: |
+          set -euo pipefail
+          cp -R "Builds/MacOSX/build/Release/Epsilon FET.vst3" \
+            "Builds/MacOSX/build/Release/Epsilon FET.component" \
+            "Builds/MacOSX/build/Release/Epsilon FET.app" "$GITHUB_WORKSPACE/dist/"
+          cp README.md PROJECT_STATUS.md "Epsilon FET Manual.pdf" "$GITHUB_WORKSPACE/dist/"
+
+      - name: Save plugins and available logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: EpsilonFET-macOS-${{ github.run_id }}-${{ github.run_attempt }}
+          path: dist
+          if-no-files-found: error
+          retention-days: 30
