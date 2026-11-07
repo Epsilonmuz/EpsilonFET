@@ -1,5 +1,7 @@
 # Epsilon FET v0.2.0 — circuit-modelled FET compressor
 
+> Development status: v0.2.0 candidate. The owner has not yet installed or auditioned this version. Prior testing by Claude is reported by the owner; supplied measurements have not been independently reproduced during this repository import. Mac CI and FL Studio validation are pending until runs are recorded.
+
 A 1176 Rev D–family compressor that simulates the circuit itself. The FET, the C22 detector capacitor, the rectifier diodes, the input and output transformers and the class-A output transistor are each solved as electrical parts (volts, amps, ohms), with implicit integration and bounded Newton steps, at 4× the host rate. Built from the Epsilon Analog Research dossier (05 Nov 2026). Full guide with a picture of every control: `Epsilon FET Manual.pdf`.
 
 ![Epsilon FET](docs/manual/img/full.png)
