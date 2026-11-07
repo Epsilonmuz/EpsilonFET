@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio Version 17
+
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Epsilon FET - Standalone Plugin", "Epsilon FET_StandalonePlugin.vcxproj", "{50E1F377-C6A3-1AB7-05F7-6F0BA7B1ABE6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{852814A8-6FAF-C518-FB85-8842014BF00F} = {852814A8-6FAF-C518-FB85-8842014BF00F}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Epsilon FET - VST3", "Epsilon FET_VST3.vcxproj", "{9A2CAD2D-E810-5DC0-D232-5CE26E67FEB5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{852814A8-6FAF-C518-FB85-8842014BF00F} = {852814A8-6FAF-C518-FB85-8842014BF00F}
+		{E64D0771-F43F-46DB-EC40-0F2A20E91531} = {E64D0771-F43F-46DB-EC40-0F2A20E91531}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Epsilon FET - Shared Code", "Epsilon FET_SharedCode.vcxproj", "{852814A8-6FAF-C518-FB85-8842014BF00F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Epsilon FET - VST3 Manifest Helper", "Epsilon FET_VST3ManifestHelper.vcxproj", "{E64D0771-F43F-46DB-EC40-0F2A20E91531}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A2CAD2D-E810-5DC0-D232-5CE26E67FEB5}.Debug|x64.ActiveCfg = Debug|x64
+		{9A2CAD2D-E810-5DC0-D232-5CE26E67FEB5}.Debug|x64.Build.0 = Debug|x64
+		{9A2CAD2D-E810-5DC0-D232-5CE26E67FEB5}.Release|x64.ActiveCfg = Release|x64
+		{9A2CAD2D-E810-5DC0-D232-5CE26E67FEB5}.Release|x64.Build.0 = Release|x64
+		{50E1F377-C6A3-1AB7-05F7-6F0BA7B1ABE6}.Debug|x64.ActiveCfg = Debug|x64
+		{50E1F377-C6A3-1AB7-05F7-6F0BA7B1ABE6}.Debug|x64.Build.0 = Debug|x64
+		{50E1F377-C6A3-1AB7-05F7-6F0BA7B1ABE6}.Release|x64.ActiveCfg = Release|x64
+		{50E1F377-C6A3-1AB7-05F7-6F0BA7B1ABE6}.Release|x64.Build.0 = Release|x64
+		{852814A8-6FAF-C518-FB85-8842014BF00F}.Debug|x64.ActiveCfg = Debug|x64
+		{852814A8-6FAF-C518-FB85-8842014BF00F}.Debug|x64.Build.0 = Debug|x64
+		{852814A8-6FAF-C518-FB85-8842014BF00F}.Release|x64.ActiveCfg = Release|x64
+		{852814A8-6FAF-C518-FB85-8842014BF00F}.Release|x64.Build.0 = Release|x64
+		{E64D0771-F43F-46DB-EC40-0F2A20E91531}.Debug|x64.ActiveCfg = Debug|Win32
+		{E64D0771-F43F-46DB-EC40-0F2A20E91531}.Debug|x64.Build.0 = Debug|Win32
+		{E64D0771-F43F-46DB-EC40-0F2A20E91531}.Release|x64.ActiveCfg = Release|Win32
+		{E64D0771-F43F-46DB-EC40-0F2A20E91531}.Release|x64.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

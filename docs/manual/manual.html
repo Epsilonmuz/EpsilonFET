@@ -1,0 +1,89 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Epsilon FET Manual</title><style>
+@page { size: Letter; margin: 14mm 14mm 16mm; }
+:root { --ink:#1b1c1f; --soft:#5d5a54; --line:#e2ded6; --amber:#d48a22; --bg:#f7f5f1; }
+body { font-family: Inter, Arial, sans-serif; color: var(--ink); font-size: 10.4pt; line-height: 1.45; margin: 0; }
+h1 { font-size: 28pt; letter-spacing: .08em; margin: 0; } .brand { color: var(--amber); letter-spacing: .45em; font-weight: 700; font-size: 10pt; }
+h2 { font-size: 16pt; margin: 22px 0 8px; padding-bottom: 4px; border-bottom: 2px solid var(--amber); break-after: avoid; }
+h3 { font-size: 12pt; margin: 0 0 4px; display:flex; align-items:center; gap:8px; }
+p { margin: 0 0 7px; } ul { margin: 0 0 7px; padding-left: 18px; }
+.sub { color: var(--soft); letter-spacing: .18em; font-size: 9pt; text-transform: uppercase; }
+.cover { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom: 10px; } .ver { color: var(--soft); font-size: 9.5pt; text-align:right; }
+.hero { position: relative; border-radius: 10px; overflow: hidden; } .hero img { width: 100%; display:block; }
+.badge { position:absolute; transform: translate(-50%,-50%); background: var(--amber); color:#111; font-weight:700; font-size:8.5pt; width:19px; height:19px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 2px #111; }
+ol.legend { list-style:none; padding:0; columns: 4; margin: 8px 0 0; font-size: 9.3pt; } ol.legend b { display:inline-block; width:18px; color:#9a620f; }
+.n { background: var(--amber); color:#111; font-size:9pt; min-width:20px; height:20px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; }
+.card { display:flex; gap:14px; align-items:flex-start; padding: 10px 0; border-bottom: 1px solid var(--line); break-inside: avoid; }
+.card .pic img { border-radius: 8px; display:block; max-width: 170px; max-height: 210px; }
+.card.wide { flex-direction: column; } .card.wide .pic img { max-width: 100%; max-height: 240px; } .card .txt { flex: 1; }
+.meta { display:flex; gap:16px; color: var(--soft); font-size: 9pt; margin-bottom: 5px; } .meta b { color: var(--ink); }
+.tip { background: var(--bg); border-left: 3px solid var(--amber); padding: 5px 9px; border-radius: 4px; font-size: 9.5pt; }
+table { width:100%; border-collapse: collapse; font-size: 9.6pt; margin: 6px 0; } td, th { border-bottom: 1px solid var(--line); padding: 5px 6px; text-align:left; vertical-align: top; }
+th { background: var(--bg); } td:first-child { white-space: nowrap; font-weight: 600; } code { background: var(--bg); padding: 1px 4px; border-radius: 3px; font-size: 9pt; }
+.break { break-before: page; } .chain { background: var(--bg); border-radius: 8px; padding: 10px 12px; font-size: 9.6pt; }
+</style></head><body>
+<div class="cover"><div><div class="brand">EPSILON</div><h1>FET</h1><div class="sub">Circuit-modelled FET compressor · User manual</div></div>
+<div class="ver">Version 0.2.0<br>VST3 · AU · Standalone</div></div>
+<p>Epsilon FET is a compressor modelled on the 1176 Rev D family. Instead of imitating the sound with curves, it <b>simulates the circuit itself</b>: the FET, the detector capacitor, the diodes,
+the transformers and the output transistor are each solved as electrical parts in volts and ohms, thousands of times per millisecond. The character (the fast grab, the bass grit, the all-buttons aggression)
+comes out of the circuit, the way it does on the hardware.</p>
+<div class="hero"><img src="img/full.png"><span class="badge" style="left:35.74%;top:3.20%">1</span><span class="badge" style="left:80.37%;top:3.20%">2</span><span class="badge" style="left:5.00%;top:18.40%">3</span><span class="badge" style="left:4.63%;top:77.20%">4</span><span class="badge" style="left:40.93%;top:28.80%">5</span><span class="badge" style="left:61.30%;top:28.80%">6</span><span class="badge" style="left:82.41%;top:55.20%">7</span><span class="badge" style="left:90.74%;top:55.20%">8</span><span class="badge" style="left:82.41%;top:17.60%">9</span><span class="badge" style="left:90.19%;top:17.20%">10</span><span class="badge" style="left:90.19%;top:26.80%">11</span><span class="badge" style="left:39.81%;top:78.40%">12</span><span class="badge" style="left:68.33%;top:3.20%">13</span></div><ol class="legend"><li><b>1</b> Presets</li><li><b>2</b> Power</li><li><b>3</b> VU meter</li><li><b>4</b> Meter mode</li><li><b>5</b> Input</li><li><b>6</b> Output</li><li><b>7</b> Attack</li><li><b>8</b> Release</li><li><b>9</b> Mix</li><li><b>10</b> Stereo link</li><li><b>11</b> Quality</li><li><b>12</b> Ratio buttons</li><li><b>13</b> X-ray</li></ol>
+
+<h2>Quick start</h2><ol>
+<li>Insert Epsilon FET on a vocal, bass or drum track. Pick a preset (<b>1</b>) close to the job.</li>
+<li>Turn <b>Input</b> (<b>5</b>) up until the VU meter (<b>3</b>) dips 3–7 dB on the loud parts. The threshold is fixed: Input is how you compress more.</li>
+<li>Set <b>Attack</b> (<b>7</b>) and <b>Release</b> (<b>8</b>): 7 is fastest on both.</li>
+<li>Set <b>Output</b> (<b>6</b>) so the level matches with Power (<b>2</b>) off, then compare.</li></ol>
+
+<h2 class="break">Every control</h2><section class="card"><div class="pic"><img src="img/preset.png" alt="Presets"></div>
+<div class="txt"><h3><span class="n">1</span>Presets</h3><div class="meta"><span>Range <b>9 presets</b></span><span>Default <b>Init</b></span></div><p>Factory starting points, in the amber display at the top. They set Input, Output, Attack, Release, Ratio and Mix; they never touch Power, Link or Quality. They also appear in your DAW's program list.</p></div></section><section class="card"><div class="pic"><img src="img/power.png" alt="Power"></div>
+<div class="txt"><h3><span class="n">2</span>Power</h3><div class="meta"><span>Range <b>on / off</b></span><span>Default <b>on (lit)</b></span></div><p>Lamp lit = processing. Lamp off = bypass. The latency stays the same either way, so switching it in and out stays in time.</p><p class="tip"><b>Try:</b> match the level with Output first, then compare with Power off.</p></div></section><section class="card wide"><div class="pic"><img src="img/vu.png" alt="VU meter"></div>
+<div class="txt"><h3><span class="n">3</span>VU meter</h3><p>A real VU ballistic (about 300 ms rise, slight overshoot). In <b>GR</b> mode the needle rests at 0 and falls left as the FET turns the signal down: −5 means 5 dB of gain reduction. In <b>+4</b> and <b>+8</b> modes it shows the output level, with 0 VU at +4 or +8 dBu (a −18 dBFS peak sine is +4 dBu).</p></div></section><section class="card"><div class="pic"><img src="img/meterbuttons.png" alt="Meter mode: GR / +4 / +8 / OFF"></div>
+<div class="txt"><h3><span class="n">4</span>Meter mode: GR / +4 / +8 / OFF</h3><div class="meta"><span>Range <b>4 modes</b></span><span>Default <b>GR</b></span></div><p>Chooses what the VU meter shows. Saved with the session; it doesn't change the sound.</p></div></section><section class="card"><div class="pic"><img src="img/input.png" alt="Input"></div>
+<div class="txt"><h3><span class="n">5</span>Input</h3><div class="meta"><span>Range <b>−24 to +24 dB</b></span><span>Default <b>0 dB</b></span></div><p>How hard the signal is driven into the FET. Like the hardware, the threshold is fixed: <b>turn Input up for more compression</b>. With Input at 0 dB, compression starts around −26 dBFS at 4:1 (higher at higher ratios).</p><p class="tip"><b>Try:</b> vocals: raise Input until the meter dips 3–7 dB on loud words, then set Output to match.</p></div></section><section class="card"><div class="pic"><img src="img/output.png" alt="Output"></div>
+<div class="txt"><h3><span class="n">6</span>Output</h3><div class="meta"><span>Range <b>−24 to +24 dB</b></span><span>Default <b>0 dB</b></span></div><p>Level after the compressor, before the class-A output stage and output transformer. Use it to make up the level the compression took away. Pushed very hard, the output stage itself starts to saturate.</p></div></section><section class="card"><div class="pic"><img src="img/attack.png" alt="Attack"></div>
+<div class="txt"><h3><span class="n">7</span>Attack</h3><div class="meta"><span>Range <b>1 – 7</b></span><span>Default <b>3</b></span></div><p>How fast the FET clamps down. <b>7 is fastest, 1 is slowest</b>, as on the hardware. The detector time constant runs from 20 µs (7) to about 0.8 ms (1). Slower attack lets the front of drum hits and consonants through.</p><p class="tip"><b>Try:</b> 1–3 on drums to keep punch; 5–7 to catch peaks.</p></div></section><section class="card"><div class="pic"><img src="img/release.png" alt="Release"></div>
+<div class="txt"><h3><span class="n">8</span>Release</h3><div class="meta"><span>Range <b>1 – 7</b></span><span>Default <b>7</b></span></div><p>How fast it lets go: about 50 ms at 7 to 1.1 s at 1 (the 5 MΩ release pot in the circuit). Fast release on bass makes the FET ripple inside each cycle, which adds the hardware's famous low-end grit.</p><p class="tip"><b>Try:</b> 7 for an aggressive, breathing sound; 3–4 for smooth vocals; 1–2 for slow levelling.</p></div></section><section class="card"><div class="pic"><img src="img/mix.png" alt="Mix"></div>
+<div class="txt"><h3><span class="n">9</span>Mix</h3><div class="meta"><span>Range <b>0 – 100 %</b></span><span>Default <b>100 %</b></span></div><p>Blend of compressed and original signal (parallel compression). The original goes through the same oversampling filters, so the blend never comb-filters and adds no extra delay.</p><p class="tip"><b>Try:</b> All buttons, attack 7, release 7, Mix 30–50 % on a drum bus.</p></div></section><section class="card"><div class="pic"><img src="img/link.png" alt="Stereo link"></div>
+<div class="txt"><h3><span class="n">10</span>Stereo link</h3><div class="meta"><span>Range <b>on / off</b></span><span>Default <b>on</b></span></div><p>On: both channels share one detector capacitor, so the stereo image stays put. Off: each side compresses on its own.</p></div></section><section class="card"><div class="pic"><img src="img/quality.png" alt="Quality: STUDIO 4X / ECO 2X"></div>
+<div class="txt"><h3><span class="n">11</span>Quality: STUDIO 4X / ECO 2X</h3><div class="meta"><span>Range <b>2 settings</b></span><span>Default <b>Studio 4x</b></span></div><p>The rate the circuit is simulated at. Studio runs it at 4× the host rate (best accuracy, lowest aliasing); Eco at 2× uses about half the CPU, for big sessions. Latency is about 0.1 ms either way.</p></div></section><section class="card"><div class="pic"><img src="img/ratio.png" alt="Ratio buttons: 4 / 8 / 12 / 20 / ALL"></div>
+<div class="txt"><h3><span class="n">12</span>Ratio buttons: 4 / 8 / 12 / 20 / ALL</h3><div class="meta"><span>Range <b>5 settings</b></span><span>Default <b>4</b></span></div><p>Selects the ratio network in the sidechain. Higher ratios also raise the threshold, as on the hardware. <b>ALL</b> is the famous all-buttons-in trick: the networks load each other, the threshold drops, attack speeds up and it gets loud and aggressive.</p><p class="tip"><b>Try:</b> 4 for vocals and bass, 8–12 for tighter control, 20 as a peak limiter, ALL for room mics and smashed drums.</p></div></section><section class="card wide"><div class="pic"><img src="img/xray.png" alt="X-RAY"></div>
+<div class="txt"><h3><span class="n">13</span>X-RAY</h3><div class="meta"><span>Range <b>on / off</b></span><span>Default <b>off</b></span></div><p>Turns the faceplate into smoked glass and shows the circuit being simulated, live, with every part sitting behind the control that drives it:</p><img src="img/full_xray.png" style="width:100%;border-radius:8px;margin:4px 0 8px"><ul><li><b>Signal path</b>: IN → input transformer (behind the meter) → Input pot (behind the Input knob) → R5 → the FET → preamp → Output pot (behind the Output knob) → Q6 → output transformer → OUT. It glows and carries moving charge, faster when louder.</li><li><b>Q1, the FET</b>, between the two big knobs: glows brighter the more it compresses; beside it, its gate voltage and channel resistance.</li><li><b>Sidechain</b>: from the preamp down to the detector diode, attack resistor and C22 (below Attack) and the release resistor (below Release). C22 fills with its stored charge.</li><li><b>Gate control</b>: the line carrying C22's voltage back to the FET lights up as it is driven.</li><li><b>Input core</b>: glows red as the input transformer nears saturation.</li></ul><p>X-ray is a view only: the sound is identical either way. It redraws the whole window, so leave it off in big sessions on older computers.</p></div></section>
+
+<h2 class="break">What is simulated</h2>
+<div class="chain">input transformer → Input pot → R5 27 kΩ + Q1 2N5457 JFET shunt (with drain-to-gate linearising feedback) → preamp → Output pot → Q6 class-A output stage → output transformer<br>
+sidechain from the preamp output (before the Output pot) → ratio network → diode rectifier → C22 0.22 µF, charged through the attack resistance, drained through the 5 MΩ release pot → Q1 gate</div>
+<ul>
+<li><b>The FET</b> uses a symmetric JFET equation that is valid for both signal polarities, in the linear (triode) and saturation regions. Half the drain voltage is fed back to the gate, as in the real circuit, which cancels most of the FET's distortion; the small mismatch that remains, and the FET's channel-length modulation, give the harmonics.</li>
+<li><b>Bias</b> is set like the factory calibration: the gate is trimmed so the FET takes exactly 1 dB at rest, then the preamp makes up that 1 dB.</li>
+<li><b>The detector</b> charges C22 through a real diode (exponential law) in series with the attack resistance, and drains it through the release resistance, with implicit (trapezoidal) integration.</li>
+<li><b>The transformers</b> saturate on magnetic flux, the integral of the voltage, so low frequencies saturate first, as in a real core.</li>
+<li>Each part is solved with a few damped Newton steps per sample, at 4× the host rate (2× in Eco). Work per sample is bounded: no unbounded loops, no memory allocation while playing.</li>
+<li>Levels are calibrated: a −18 dBFS peak sine is +4 dBu into the circuit.</li></ul>
+
+<h2>Measured behaviour</h2>
+<p>From <code>tests/measure_engine.py</code> (full report: <code>docs/measurements.md</code>). These are measurements of the model against the published 1176 specifications, not against a particular hardware unit.</p>
+<table><tr><th>Test</th><th>Result</th><th>Published 1176</th></tr>
+<tr><td>Attack, knob 7 → 1</td><td>100 µs → 760 µs to 63 % on a 1 kHz step (detector RC 20 µs → 0.8 ms)</td><td>20 µs – 800 µs</td></tr>
+<tr><td>Release, knob 7 → 1</td><td>52 ms → 1.09 s to 63 % recovery</td><td>50 ms – 1.1 s</td></tr>
+<tr><td>Ratios (slope above the knee)</td><td>4.4 / 12 / 15 / 24 : 1</td><td>4 / 8 / 12 / 20 : 1 (nominal)</td></tr>
+<tr><td>Distortion, compressor off, +4 dBu</td><td>0.10 % (mostly 2nd harmonic)</td><td>&lt; 0.5 %</td></tr>
+<tr><td>Distortion, 4:1, ~4 dB GR</td><td>0.25 %</td><td>&lt; 0.5 %</td></tr>
+<tr><td>Bass, 50 Hz, attack/release 7</td><td>4.7 % (3rd harmonic)</td><td>known low-end grit</td></tr>
+<tr><td>Aliasing, 15 kHz at heavy GR</td><td>below −100 dBFS</td><td>–</td></tr>
+<tr><td>Latency</td><td>6 samples at 48 kHz (0.12 ms)</td><td>–</td></tr></table>
+<p>The 8, 12 and 20 buttons come out steeper than their nominal ratios over the measured range; the 4 button is close to 4:1. Feedback FET compressors are not exact-ratio devices, and the published ratios are nominal.</p>
+
+<h2>Factory presets</h2><table><tr><th>Preset</th><th>Settings</th></tr><tr><td>Init</td><td>Everything at default.</td></tr><tr><td>Vocal - Classic</td><td>4:1, attack 3, release 7, Input +8.</td></tr><tr><td>Vocal - Upfront</td><td>8:1, attack 5, release 6, Input +12: bright and in your face.</td></tr><tr><td>Bass - Even</td><td>4:1, slow attack 2, release 4: evens notes, keeps the pluck.</td></tr><tr><td>Drums - Parallel Smash</td><td>All buttons, 7/7, Input +14, Mix 45 %.</td></tr><tr><td>Room Mics - All In</td><td>All buttons, 7/7, Input +14, full wet.</td></tr><tr><td>Snare - Snap</td><td>8:1, slowest attack (1), fast release: lets the crack through.</td></tr><tr><td>Mix Bus - Gentle</td><td>4:1, slow attack and release, Mix 60 %.</td></tr><tr><td>Peak Limiter</td><td>20:1, fastest attack, release 5.</td></tr></table>
+
+<h2 class="break">Installing and building (Mac)</h2><ol>
+<li>Double-click <b>EpsilonFET.jucer</b>. It opens in Projucer with all the code in; JUCE 9.0.5 is inside the folder.</li>
+<li>Click the Xcode button at the top (Save and Open in IDE).</li>
+<li>In Xcode choose the scheme <b>Epsilon FET - All</b>, then Product › Build. Both Debug and Release are optimised, so either is fast; a red <i>SLOW UNOPTIMISED BUILD</i> in the footer would mean otherwise.</li>
+<li>Xcode copies the plugin to <code>~/Library/Audio/Plug-Ins/VST3/</code> and <code>Components/</code>. Rescan in your DAW.</li></ol>
+
+<h2>What this is, and what it isn't</h2>
+<p>The circuit follows a documented Rev D derivative (Hairball FET/RACK D v1.11) using the component values in the Epsilon research dossier. Some values were <b>fitted</b> so the model meets the published behaviour, because no hardware unit was measured:
+the FET drive level, the sidechain gain, threshold and gate scaling of each ratio network, and the attack and release endpoints (both within the range of the pots in the schematic). The transformer magnetics use nominal values.
+The next step to a true hardware match is the research's measurement protocol: capture a named unit and fit those values to it.</p>
+</body></html>
