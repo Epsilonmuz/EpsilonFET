@@ -2,6 +2,10 @@
 
 Development repository for Epsilon Sounds' FET compressor.
 
+## User manual
+
+[Read the illustrated Epsilon FET v0.2.0 manual](EpsilonFET-v0.2.0-User-Manual.pdf) for macOS and FL Studio setup, every control and meter mode, all nine factory presets, and examples for vocals, 808s, drums, and mix buses.
+
 ## Validation status
 
 - The owner has not yet installed, auditioned or tested this version in FL Studio.
