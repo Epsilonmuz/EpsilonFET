@@ -55,7 +55,16 @@ jobs:
           xcodebuild -project "Builds/MacOSX/Epsilon FET.xcodeproj" \
             -target "Epsilon FET - All" -configuration Release \
             ARCHS="arm64 x86_64" ONLY_ACTIVE_ARCH=NO CODE_SIGN_IDENTITY="-" -quiet build
-          lipo -verify_arch x86_64 arm64 "Builds/MacOSX/build/Release/Epsilon FET.vst3/Contents/MacOS/Epsilon FET"
+      - name: Verify Intel and Apple Silicon binaries
+        working-directory: project
+        run: |
+          set -euo pipefail
+          build_dir="Builds/MacOSX/build/Release"
+          for format in vst3 component app; do
+            executable="$build_dir/Epsilon FET.$format/Contents/MacOS/Epsilon FET"
+            lipo -info "$executable"
+            lipo "$executable" -verify_arch x86_64 arm64
+          done
 
       - name: Run supplied processor tests on Intel
         working-directory: project
@@ -81,10 +90,14 @@ jobs:
         working-directory: project
         run: |
           set -euo pipefail
-          cp -R "Builds/MacOSX/build/Release/Epsilon FET.vst3" \
-            "Builds/MacOSX/build/Release/Epsilon FET.component" \
-            "Builds/MacOSX/build/Release/Epsilon FET.app" "$GITHUB_WORKSPACE/dist/"
-          cp README.md PROJECT_STATUS.md "Epsilon FET Manual.pdf" "$GITHUB_WORKSPACE/dist/"
+          build_dir="Builds/MacOSX/build/Release"
+          package_dir="$RUNNER_TEMP/EpsilonFET-v0.2.0-macOS"
+          mkdir -p "$package_dir"
+          cp -R "$build_dir/Epsilon FET.vst3" "$build_dir/Epsilon FET.component" \
+            "$build_dir/Epsilon FET.app" "$package_dir/"
+          cp README.md PROJECT_STATUS.md "Epsilon FET Manual.pdf" "$package_dir/"
+          ditto -c -k --sequesterRsrc --keepParent "$package_dir" \
+            "$GITHUB_WORKSPACE/dist/EpsilonFET-v0.2.0-macOS.zip"
 
       - name: Save plugins and available logs
         if: always()
