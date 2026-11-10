@@ -24,6 +24,7 @@ endif()
 juce_add_plugin(EpsilonFET
     COMPANY_NAME "Epsilon Sounds"
     PRODUCT_NAME "Epsilon FET"
+    ICON_BIG "${CMAKE_CURRENT_SOURCE_DIR}/Resources/AppIcon.png"
     VERSION 0.2.0
     PLUGIN_MANUFACTURER_CODE Epsl
     PLUGIN_CODE EpFt

@@ -5,25 +5,40 @@
               companyName="Epsilon Sounds" companyCopyright="Edison" bundleIdentifier="com.epsilonsounds.epsilonfet"
               pluginFormats="buildAU,buildStandalone,buildVST3" pluginCharacteristicsValue=""
               pluginName="Epsilon FET" pluginDesc="Circuit-modelled FET compressor"
-              pluginManufacturer="Epsilon Sounds" pluginManufacturerCode="Epsl" pluginCode="EpFt"
-              pluginAUMainType="'aufx'" pluginVST3Category="Fx|Dynamics" pluginAUExportPrefix="EpsilonFetAU"
-              cppLanguageStandard="17" displaySplashScreen="0" defines="JUCE_WEB_BROWSER=0&#10;JUCE_USE_CURL=0">
+              pluginManufacturer="Epsilon Sounds" pluginManufacturerCode="Epsl"
+              pluginCode="EpFt" pluginAUMainType="'aufx'" pluginVST3Category="Fx|Dynamics"
+              pluginAUExportPrefix="EpsilonFetAU" cppLanguageStandard="17"
+              displaySplashScreen="0" defines="JUCE_WEB_BROWSER=0&#10;JUCE_USE_CURL=0">
   <MAINGROUP id="EpMg01" name="Epsilon FET">
     <GROUP id="{EpSrc1}" name="Source">
       <FILE id="EpF001" name="FetCircuit.h" compile="0" resource="0" file="Source/FetCircuit.h"/>
-      <FILE id="EpF002" name="PluginProcessor.h" compile="0" resource="0" file="Source/PluginProcessor.h"/>
-      <FILE id="EpF003" name="PluginProcessor.cpp" compile="1" resource="0" file="Source/PluginProcessor.cpp"/>
+      <FILE id="EpF002" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="EpF003" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
       <FILE id="EpF004" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
-      <FILE id="EpF005" name="PluginEditor.cpp" compile="1" resource="0" file="Source/PluginEditor.cpp"/>
+      <FILE id="EpF005" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+    </GROUP>
+    <GROUP id="EpsIcG" name="Resources">
+      <FILE id="EpsIcn" name="AppIcon.png" compile="0" resource="0" file="Resources/AppIcon.png"/>
+    </GROUP>
+    <GROUP id="EpsShG" name="epsilon_ui (shared look)">
+      <FILE id="EpsSh0" name="EpsilonPalette.h" compile="0" resource="0"
+            file="Shared/epsilon_ui/EpsilonPalette.h"/>
+      <FILE id="EpsSh1" name="EpsilonBrandArt.h" compile="0" resource="0"
+            file="Shared/epsilon_ui/EpsilonBrandArt.h"/>
+      <FILE id="EpsSh2" name="EpsilonHeader.h" compile="0" resource="0" file="Shared/epsilon_ui/EpsilonHeader.h"/>
+      <FILE id="EpsSh3" name="EpsilonDialFont.h" compile="0" resource="0"
+            file="Shared/epsilon_ui/EpsilonDialFont.h"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_VST3_CAN_REPLACE_VST2="0" JUCE_WEB_BROWSER="0" JUCE_USE_CURL="0"/>
   <EXPORTFORMATS>
-    <XCODE_MAC targetFolder="Builds/MacOSX">
+    <XCODE_MAC targetFolder="Builds/MacOSX" bigIcon="EpsIcn">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" optimisation="3" macOSDeploymentTarget="12.0"/>
-        <CONFIGURATION isDebug="0" name="Release" optimisation="3" macOSDeploymentTarget="12.0"
-                      />
+        <CONFIGURATION isDebug="0" name="Release" optimisation="3" macOSDeploymentTarget="12.0"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_audio_basics" path="JUCE/modules"/>
@@ -42,7 +57,7 @@
         <MODULEPATH id="juce_gui_extra" path="JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
-    <VS2022 targetFolder="Builds/VisualStudio2022">
+    <VS2022 targetFolder="Builds/VisualStudio2022" bigIcon="EpsIcn">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" optimisation="3" useRuntimeLibDLL="0"/>
         <CONFIGURATION isDebug="0" name="Release" optimisation="3" useRuntimeLibDLL="0"/>
@@ -64,7 +79,7 @@
         <MODULEPATH id="juce_gui_extra" path="JUCE/modules"/>
       </MODULEPATHS>
     </VS2022>
-    <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile" bigIcon="EpsIcn">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" optimisation="3"/>
         <CONFIGURATION isDebug="0" name="Release" optimisation="3"/>

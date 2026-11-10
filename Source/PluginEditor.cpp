@@ -4,7 +4,7 @@ using namespace epsui;
 
 juce::Font epsui::font (float size, bool bold, float tracking)
 {
-    juce::Font f { juce::FontOptions ("Inter", size, bold ? juce::Font::bold : juce::Font::plain) };
+    auto f = epsilon_ui::dial::font (size, bold);       // Epsilon Dial, the house typeface
     if (tracking != 0.0f) f.setExtraKerningFactor (tracking);
     return f;
 }
@@ -795,12 +795,9 @@ void EpsilonFetEditor::renderPlate()
     { juce::Path lens; lens.addRoundedRectangle (sc (426, 80, 428, 364).toFloat(), 120 * s); well (lens); }
     { juce::Path col2; col2.addRoundedRectangle (sc (872, 80, 196, 330).toFloat(), 36 * s); well (col2); }
 
-    g.setColour (col::champ);
-    g.setFont (font (12.0f * s, true, 0.55f));
-    g.drawText ("EPSILON", sc (40, 22, 120, 36).toFloat(), juce::Justification::centredLeft);
-    g.setColour (col::text);
-    g.setFont (font (26.0f * s, true, 0.12f));
-    g.drawText ("FET", sc (156, 20, 80, 40).toFloat(), juce::Justification::centredLeft);
+    // Epsilon Sounds product mark: the Hallmark + EPSILON FET (shared design system)
+    epsilon_ui::drawProductMark (g, { 40 * s, 22 * s }, s, epsilon_ui::Tier::Epsilon, "FET", {},
+                                 [] (float h, bool b) { return font (h, b); });
     g.setFont (font (11.0f * s, true, 0.3f));
     g.drawText ("RATIO", sc (436, 440, 408, 16).toFloat(), juce::Justification::centred);
     g.drawText ("METER", sc (40, 428, 360, 16).toFloat(), juce::Justification::centred);

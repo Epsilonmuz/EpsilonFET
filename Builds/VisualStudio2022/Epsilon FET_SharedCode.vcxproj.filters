@@ -5,6 +5,12 @@
     <Filter Include="Epsilon FET\Source">
       <UniqueIdentifier>{26591294-DE6E-7456-D970-99E360DFE2C6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Epsilon FET\Resources">
+      <UniqueIdentifier>{F4C3198E-C0BE-87D4-19E8-01D98A9BE616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Epsilon FET\epsilon_ui (shared look)">
+      <UniqueIdentifier>{8F0A2076-0F76-F4EC-28DF-F0D7307AFCD9}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Epsilon FET">
       <UniqueIdentifier>{A0291191-D4A4-73CF-6E64-5B0070BFF4A7}</UniqueIdentifier>
     </Filter>
@@ -5025,6 +5031,18 @@
     <ClInclude Include="..\..\Source\PluginEditor.h">
       <Filter>Epsilon FET\Source</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Shared\epsilon_ui\EpsilonPalette.h">
+      <Filter>Epsilon FET\epsilon_ui (shared look)</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Shared\epsilon_ui\EpsilonBrandArt.h">
+      <Filter>Epsilon FET\epsilon_ui (shared look)</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Shared\epsilon_ui\EpsilonHeader.h">
+      <Filter>Epsilon FET\epsilon_ui (shared look)</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Shared\epsilon_ui\EpsilonDialFont.h">
+      <Filter>Epsilon FET\epsilon_ui (shared look)</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h">
       <Filter>JUCE Modules\juce_audio_basics\audio_play_head</Filter>
     </ClInclude>
@@ -9845,6 +9863,9 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\Resources\AppIcon.png">
+      <Filter>Epsilon FET\Resources</Filter>
+    </None>
     <None Include="..\..\JUCE\modules\juce_audio_devices\native\asio\LICENSE.txt">
       <Filter>JUCE Modules\juce_audio_devices\native\asio</Filter>
     </None>
@@ -9970,6 +9991,9 @@
     </None>
     <None Include="..\..\JUCE\modules\juce_gui_extra\native\typescript\webview-interop\README.md">
       <Filter>JUCE Modules\juce_gui_extra\native\typescript\webview-interop</Filter>
+    </None>
+    <None Include=".\icon.ico">
+      <Filter>JUCE Library Code</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -1,6 +1,8 @@
 #pragma once
 #include <juce_audio_processors/juce_audio_processors.h>
 #include "PluginProcessor.h"
+#include "../Shared/epsilon_ui/EpsilonHeader.h"
+#include "../Shared/epsilon_ui/EpsilonDialFont.h"
 
 namespace epsui
 {
