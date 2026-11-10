@@ -3,6 +3,7 @@
 #include "PluginProcessor.h"
 #include "../Shared/epsilon_ui/EpsilonHeader.h"
 #include "../Shared/epsilon_ui/EpsilonDialFont.h"
+#include "../Shared/epsilon_ui/EpsilonSignature.h"
 
 namespace epsui
 {

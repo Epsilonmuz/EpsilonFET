@@ -26,63 +26,10 @@ epsui::LookAndFeel::LookAndFeel()
     setColour (juce::TooltipWindow::outlineColourId, col::line);
 }
 
-// champagne-gold machined knob on a black skirt; the value ring is champagne (amber means "live")
-void epsui::LookAndFeel::drawRotarySlider (juce::Graphics& g, int x, int y, int w, int h, float pos, float a0, float a1, juce::Slider& sl)
+// Epsilon Sounds signature coin-edge knob (static layers cached): the same knob across the whole line
+void epsui::LookAndFeel::drawRotarySlider (juce::Graphics& g, int x, int y, int w, int h, float pos, float, float, juce::Slider& sl)
 {
-    const auto r = juce::Rectangle<float> ((float) x, (float) y, (float) w, (float) h);
-    const float rad = juce::jmin (r.getWidth(), r.getHeight()) * 0.5f;
-    const auto c = r.getCentre();
-    const float ang = a0 + pos * (a1 - a0);
-    const bool bipolar = (bool) sl.getProperties().getWithDefault ("bipolar", false);
-
-    const float ringR = rad * 0.97f, ringW = juce::jmax (2.5f, rad * 0.06f);
-    juce::Path track; track.addCentredArc (c.x, c.y, ringR, ringR, 0, a0, a1, true);
-    g.setColour (juce::Colour (0xff0b0c0e));
-    g.strokePath (track, juce::PathStrokeType (ringW + 2.0f, juce::PathStrokeType::curved, juce::PathStrokeType::rounded));
-    const float from = bipolar ? (a0 + a1) * 0.5f : a0;
-    if (std::abs (ang - from) > 0.01f)
-    {
-        juce::Path val; val.addCentredArc (c.x, c.y, ringR, ringR, 0, juce::jmin (from, ang), juce::jmax (from, ang), true);
-        g.setColour (col::champ.withAlpha (0.18f));
-        g.strokePath (val, juce::PathStrokeType (ringW + 5.0f, juce::PathStrokeType::curved, juce::PathStrokeType::rounded));
-        g.setColour (col::champ);
-        g.strokePath (val, juce::PathStrokeType (ringW, juce::PathStrokeType::curved, juce::PathStrokeType::rounded));
-    }
-
-    const float body = rad * 0.82f;
-    juce::ColourGradient shadow (juce::Colours::black.withAlpha (0.65f), c.x, c.y + body * 0.25f, juce::Colours::transparentBlack, c.x, c.y + body * 1.4f, true);
-    g.setGradientFill (shadow);
-    g.fillEllipse (c.x - body * 1.25f, c.y - body * 1.0f, body * 2.5f, body * 2.5f);
-    juce::ColourGradient skirt (juce::Colour (0xff3b3d42), c.x, c.y - body, juce::Colour (0xff0a0a0c), c.x, c.y + body, false);
-    g.setGradientFill (skirt);
-    g.fillEllipse (c.x - body, c.y - body, body * 2, body * 2);
-    g.setColour (juce::Colours::black.withAlpha (0.5f));
-    for (int i = 0; i < 60; ++i)
-    {
-        const float a = juce::MathConstants<float>::twoPi * (float) i / 60.0f;
-        g.drawLine (c.x + std::sin (a) * body * 0.86f, c.y - std::cos (a) * body * 0.86f, c.x + std::sin (a) * body * 0.99f, c.y - std::cos (a) * body * 0.99f, 1.0f);
-    }
-    const float cap = body * 0.72f;
-    juce::ColourGradient gold (juce::Colour (0xfff8ead0), c.x - cap * 0.6f, c.y - cap, juce::Colour (0xff8a6b40), c.x + cap * 0.4f, c.y + cap, false);
-    gold.addColour (0.45, col::champ);
-    g.setGradientFill (gold);
-    g.fillEllipse (c.x - cap, c.y - cap, cap * 2, cap * 2);
-    for (float k = 0.16f; k < 0.98f; k += 0.075f)
-    {
-        g.setColour (juce::Colours::white.withAlpha (k < 0.6f ? 0.08f : 0.05f));
-        g.drawEllipse (c.x - cap * k, c.y - cap * k, cap * 2 * k, cap * 2 * k, 0.8f);
-    }
-    juce::ColourGradient sheen (juce::Colours::white.withAlpha (0.4f), c.x - cap * 0.45f, c.y - cap * 0.75f, juce::Colours::transparentWhite, c.x, c.y, true);
-    g.setGradientFill (sheen);
-    g.fillEllipse (c.x - cap, c.y - cap, cap * 2, cap * 2);
-    g.setColour (juce::Colour (0xff4a3a22).withAlpha (0.7f));
-    g.drawEllipse (c.x - cap, c.y - cap, cap * 2, cap * 2, 1.0f);
-
-    const juce::Point<float> u (std::sin (ang), -std::cos (ang));
-    g.setColour (juce::Colour (0xff1e1710));
-    g.drawLine (c.x + u.x * cap * 0.18f, c.y + u.y * cap * 0.18f, c.x + u.x * cap * 0.94f, c.y + u.y * cap * 0.94f, juce::jmax (2.2f, rad * 0.05f));
-    g.setColour (col::cream);
-    g.fillEllipse (juce::Rectangle<float> (rad * 0.09f, rad * 0.09f).withCentre (c + u * body * 0.90f));
+    epsilon_ui::signature::knob (g, juce::Rectangle<float> ((float) x, (float) y, (float) w, (float) h).reduced (2.0f), pos, sl, epsilon_ui::Tier::Epsilon);
 }
 
 void epsui::LookAndFeel::drawButtonBackground (juce::Graphics& g, juce::Button& b, const juce::Colour&, bool over, bool down)
