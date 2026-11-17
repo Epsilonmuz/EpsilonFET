@@ -17,6 +17,8 @@ defaults:
 jobs:
   mac:
     runs-on: macos-15
+    permissions:
+      contents: write
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
@@ -69,3 +71,17 @@ jobs:
           name: EpsilonFET-macOS
           path: dist
           retention-days: 30
+
+      - name: Installer (puts the VST3, AU and app in the right folders)
+        run: bash .github/scripts/make-mac-installer.sh "Epsilon FET" "dist"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Epsilon-FET-macOS-Installer
+          path: installer/*.pkg
+
+      - name: Publish the installer to the "latest" release (main only)
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash .github/scripts/publish-latest.sh "Epsilon FET" installer/*.pkg

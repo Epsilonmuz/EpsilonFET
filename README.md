@@ -2,6 +2,11 @@
 
 > Development status: v0.2.0 candidate. The owner has not yet installed or auditioned this version. Prior testing by Claude is reported by the owner; supplied measurements have not been independently reproduced during this repository import. Mac CI and FL Studio validation are pending until runs are recorded.
 
+## Install (no build needed)
+
+**Mac (Intel and Apple Silicon):** download [Epsilon FET for Mac](https://github.com/Epsilonmuz/EpsilonFET/releases/latest/download/Epsilon-FET-macOS-Installer.pkg). Double-click it: the VST3 goes to `/Library/Audio/Plug-Ins/VST3`, the Audio Unit to `/Library/Audio/Plug-Ins/Components` and the standalone app to Applications. Then rescan in your DAW (FL Studio: Options > Manage plugins > Find installed plugins). The first time, macOS may say it can't check the installer (it isn't notarised by Apple): click Done, then System Settings > Privacy & Security > **Open Anyway**. No Terminal commands needed. The link always gives the newest build of `main`; it is rebuilt, test-installed on GitHub's Mac and replaced on every push.
+
+
 A 1176 Rev D–family compressor that simulates the circuit itself. The FET, the C22 detector capacitor, the rectifier diodes, the input and output transformers and the class-A output transistor are each solved as electrical parts (volts, amps, ohms), with implicit integration and bounded Newton steps, at 4× the host rate. Built from the Epsilon Analog Research dossier (05 Nov 2026). Full guide with a picture of every control: `Epsilon FET Manual.pdf`, and the illustrated user manual for macOS and FL Studio: [`EpsilonFET-v0.2.0-User-Manual.pdf`](EpsilonFET-v0.2.0-User-Manual.pdf).
 
 The project used to sit inside a git bundle file here; it is now unpacked, with its full history, so it builds and tests on GitHub like every other Epsilon plugin.
